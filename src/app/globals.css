@@ -1,26 +1,195 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sand: #f2eadb;
+  --sand-deep: #ebe0cb;
+  --ink: #2b2520;
+  --ink-soft: #4a4038;
+  --gold: #b5906a;
+  --gold-soft: #c9a885;
+  --accent: #8a9a7b; /* verde salvia — COLOR_PRINCIPAL */
+  --accent-soft: #a7b596;
+  --dark: #1c1915;
+  --dark-soft: #2a2620;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sand: var(--sand);
+  --color-sand-deep: var(--sand-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-dark: var(--dark);
+  --color-dark-soft: var(--dark-soft);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-jost);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: var(--font-jost), system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ───── Scroll reveal ───── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ───── Custom cursor (desktop only) ───── */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none !important;
+  }
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transition: transform 120ms ease-out;
+  }
+  .cursor-ring {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--gold);
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+                width 300ms ease, height 300ms ease, opacity 300ms ease;
+    opacity: 0.7;
+  }
+  .cursor-ring.is-hover {
+    width: 54px;
+    height: 54px;
+    opacity: 1;
+    border-color: var(--gold-soft);
+  }
+}
+
+/* ───── Ripple button ───── */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-ripple .ripple {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple 650ms ease-out forwards;
+  pointer-events: none;
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ───── Toast ───── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--ink);
+  color: var(--sand);
+  padding: 0.9rem 1.6rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1000;
+  border: 1px solid var(--gold);
+}
+.toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ───── Service card hover ───── */
+.service-card {
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 500ms ease, border-color 500ms ease;
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+  border-color: var(--gold);
+}
+
+/* ───── Nav blur on scroll ───── */
+.nav-solid {
+  background: color-mix(in oklab, var(--sand) 85%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* ───── Gallery asymmetric grid ───── */
+.gallery-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 240px;
+  grid-template-areas:
+    "a a b c"
+    "a a d e";
+}
+.gallery-grid > :nth-child(1) { grid-area: a; }
+.gallery-grid > :nth-child(2) { grid-area: b; }
+.gallery-grid > :nth-child(3) { grid-area: c; }
+.gallery-grid > :nth-child(4) { grid-area: d; }
+.gallery-grid > :nth-child(5) { grid-area: e; }
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 180px);
+    grid-template-areas:
+      "a a"
+      "a a"
+      "b c"
+      "d e"
+      "d e";
+  }
+}
+
+/* Hide default scrollbar flash */
+::selection {
+  background: var(--gold);
+  color: var(--sand);
 }
