@@ -295,7 +295,7 @@ export default function Landing() {
               Despertar
             </span>
           </a>
-          <ul className="hidden items-center gap-8 text-sm tracking-wide text-ink-soft md:flex">
+          <ul className="hidden items-center gap-8 text-md tracking-wide text-ink-soft md:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a href={l.href} className="transition-colors hover:text-gold">
