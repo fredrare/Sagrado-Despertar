@@ -437,7 +437,7 @@ export default function Landing() {
             <p className="mb-10 text-ink-soft leading-relaxed">
               Mi trabajo parte de la escucha profunda. Cada sesión es un diseño
               único entre herbalismo espiritual, bioenergética y el ritmo del
-              cuerpo — porque sanar, para mí, también es bailar.
+              cuerpo — porque sanar es conectar con nuestra unidad.
             </p>
 
             <ul className="space-y-4 border-l-2 border-accent pl-6">
