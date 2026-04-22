@@ -430,7 +430,7 @@ export default function Landing() {
             </h2>
             <p className="mb-5 text-ink-soft leading-relaxed">
               Soy <span className="font-medium text-ink">Tania Reyes Acha</span>,
-              danzaterapeuta, guía de ceremonias y terapeuta ayurvédica. Desde
+              danzaterapeuta, guía de ceremonias y terapeuta ayurvédica y energética. Desde
               hace siete años sostengo espacios donde el cuerpo, la energía y el
               alma se encuentran de nuevo.
             </p>
